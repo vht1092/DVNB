@@ -1,0 +1,25 @@
+#Build war, jar file
+	1. http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-create-a-deployable-war-file
+#Dong goi dung ung
+	1. cd D:\workspaceSpring\FraudDetectionSystems_v2
+	2. mvnw package -DskipTests
+#Cau hinh ben ngoai goi JAR
+	1. Spring boot uu tien se chon cac file application.properties theo thu tu sau:
+	2. http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-application-property-files
+#Doi banner
+	1. Vao banner.txt thay doi
+#Ma hoa password 
+	1. Dung jasypt D:\Software\jasypt-1.9.2 tham so password trung voi tham so -jasypt.encryptor.password trong file classpath:encrypted.properties
+	2. Cau hinh them trong class FraudDetectionSystemsApplication
+	3. @EncryptablePropertySource(name = "EncryptedProperties", value = "classpath:encrypted.properties")
+#Cai dat ojdbc6.jar
+	1. Tai file ojdbc6.jar tu trang Oracle
+	2. mvn install:install-file -Dfile=<path-to-file-jar> -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.4 -Dpackaging=jar
+	3. Sau khi cai xong vao pom.xml cau hinh
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.4</version>
+		</dependency>
+		
+#https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (link huong dan build tu console)

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Properties>
+		<Property name="PID">????</Property>
+		<Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd
+			HH:mm:ss.SSS}}{faint}%clr{%5p}%clr{${sys:PID}}{magenta}%clr{---}{faint}%clr{[%15.15t]}{faint}%clr{%-40.40c{1.}}{cyan}
+			%clr{:}{faint}%m%n%xwEx</Property>
+		<Property name="path">../logs/dvnb</Property>
+	</Properties>
+	
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+		</Console>
+		
+		
+		<RollingFile name="SpringBoot-Appender" fileName="${path}/springboot_log.log" filePattern="${path}/springboot_log-%d{-dd-MM-yyyy}.log">
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="App-Appender" fileName="${path}/app_log.log" filePattern="${path}/app_log-%d{-dd-MM-yyyy}.log">
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			</Policies>
+		</RollingFile>
+		
+	</Appenders>
+	
+	<Loggers>
+		<Logger name="com.dvnb" level="info" additivity="false">
+			<AppenderRef ref="App-Appender" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.hibernate" level="error" additivity="false">
+			<AppenderRef ref="App-Appender" />
+		</Logger>
+		<Logger name="net.sf.jasperreports" level="error" additivity="false">
+			<AppenderRef ref="App-Appender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="SpringBoot-Appender" />
+		</Root>
+	</Loggers>
+
+</Configuration>

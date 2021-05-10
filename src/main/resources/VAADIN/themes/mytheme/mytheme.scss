@@ -1,0 +1,124 @@
+// If you edit this file you need to compile the theme. See README.md for details.
+
+// Global variable overrides. Must be declared before importing Valo.
+
+// Defines the plaintext font size, weight and family. Font size affects general component sizing.
+//$v-font-size: 16px;
+//$v-font-weight: 300;
+//$v-font-family: "Open Sans", sans-serif;
+
+// Defines the border used by all components.
+//$v-border: 1px solid (v-shade 0.7);
+//$v-border-radius: 4px;
+
+// Affects the color of some component elements, e.g Button, Panel title, etc
+//$v-background-color: hsl(210, 0%, 98%);
+// Affects the color of content areas, e.g  Panel and Window content, TextField input etc
+//$v-app-background-color: $v-background-color;
+
+// Affects the visual appearance of all components
+//$v-gradient: v-linear 8%;
+//$v-bevel-depth: 30%;
+//$v-shadow-opacity: 5%;
+
+// Defines colors for indicating status (focus, success, failure)
+//$v-focus-color: valo-focus-color(); // Calculates a suitable color automatically
+//$v-friendly-color: #2c9720;
+//$v-error-indicator-color: #ed473b;
+
+// For more information, see: https://vaadin.com/book/-/page/themes.valo.html
+// Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+
+$v-font-family: wf_segoe-ui_normal, Tahoma, Verdana, Arial, sans-serif;
+$v-font-size: 13px;
+$v-font-weight: 100;
+$v-app-background-color:#fff;
+$v-background-color:#eee;
+$v-focus-color:#0072c6;
+$v-focus-style:0 0 0 1px $v-focus-color;
+$valo-menu-background-color: darken($v-focus-color,10%);
+$v-border:1 solid v-shade;
+$v-border-radius:0px;
+$v-bevel:false;
+$v-gradient:false;
+$v-shadow:false;
+$v-textfield-bevel:false;
+$v-textfield-shadow:false;
+$v-textfield-border:1px solid v-shade;
+$v-link-text-decoration:none;
+$v-overlay-shadow:0 0 0 2px #000;
+$v-overlay-border-width:2px;
+$v-window-shadow:$v-overlay-shadow;
+$v-selection-overlay-background-color:#fff;
+$v-selection-overlay-padding-horizontal:0;
+$v-selection-overlay-padding-vertical:6px;
+$v-panel-border:2px solid v-shade;
+
+@import "../valo/valo.scss";
+
+
+// Optimize the CSS output
+$v-included-components: remove($v-included-components, accordion);
+$v-included-components: remove($v-included-components, popupview);
+$v-included-components: remove($v-included-components, progressbar);
+$v-included-components: remove($v-included-components, slider);
+$v-included-components: remove($v-included-components, splitpanel);
+$v-included-components: remove($v-included-components, treetable);
+$v-included-components: remove($v-included-components, twincolselect);
+
+
+@mixin mytheme {
+    @include valo;
+    
+    .v-grid-column-header-content{
+        font-size:$v-font-size;
+    }
+
+    .v-grid-cell{
+        border-left: 1px solid rgb(230, 230, 230);
+    }
+    
+    .badgewrapper {
+      position: relative;
+      padding: 0 !important;
+    }
+
+    .valo-menu{
+        color:#B9C4C8;
+        background-color: #005593;
+    }
+  	.v-menubar-user-menu > .v-menubar-menuitem{
+  		display: inline;  
+  	}   
+    .v-grid-column-header-content{
+        text-transform:uppercase;
+        text-align:center;
+        font-weight:bold; 
+    }
+    .v-table-header-cell{
+    	font-size:12;
+    	text-align:center;
+    	text-transform:uppercase;
+    }       
+    .v-nativebutton{	 		
+		color: #0072c6;
+		border: 0;
+    }
+    .title-header{
+	    box-sizing: content-box;
+		border: medium none;
+		text-overflow: ellipsis;
+		color: rgb(255, 255, 255);
+		font: 25px/2 Arial Black,Gadget,sans-serif;
+		text-shadow: -1px 3px 1px rgb(170, 170, 170);
+    }
+    .v-label-exception{
+   		padding: 6px 0;
+    }    
+    .v-label-exception:before{
+    	font-family: ThemeIcons;
+		content: "\f05e";
+		color: #ed473b;		
+		margin-left: -14px;
+    }
+}

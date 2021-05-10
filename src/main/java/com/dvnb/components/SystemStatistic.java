@@ -46,19 +46,19 @@ public class SystemStatistic extends VerticalLayout implements ReloadComponent {
 
 		switch(CheckUserId) {
 			case "1": 
-				tenPhongBan = "PHÒNG GIÁM SÁT VÀ XỬ LÝ TRA SOÁT THẺ VÀ NGÂN HÀNG SỐ";
+				tenPhongBan = "PHÒNG GIÁM SÁT VÀ TRA SOÁT THẺ VÀ NGÂN HÀNG ĐIỆN TỬ";
 				break;
 			case "2": 
-				tenPhongBan = "PHÒNG KỸ THUẬT THẺ VÀ NGÂN HÀNG SỐ";
+				tenPhongBan = "PHÒNG KỸ THUẬT THẺ VÀ NGÂN HÀNG ĐIỆN TỬ";
 				break;
 			case "3": 
 				tenPhongBan = "PHÒNG NGHIÊN CỨU VÀ PTKD THẺ VÀ NGÂN HÀNG SỐ";
 				break;
 			case "4": 
-				tenPhongBan = "KHỐI THẺ VÀ NGÂN HÀNG SỐ";
+				tenPhongBan = "TT THẺ VÀ NGÂN HÀNG ĐIỆN TỬ";
 				break;
 		}
-		final Label label_title = new Label("Phòng ban: " + tenPhongBan);
+		final Label label_title = new Label("ĐƠN VỊ: " + tenPhongBan);
 		label_title.setStyleName(ValoTheme.LABEL_H3);
 		
 		lbLatestLogin.setValue("Latest login: [" + SecurityUtils.getLastLogin() + "]");

@@ -1,5 +1,7 @@
 package com.dvnb.services;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -34,4 +36,11 @@ public interface DvnbInvoiceMcService {
 	
 	void deleteByKyHoaDon(String ky);
 
+	int updateKyMoiByIdAndKyMoiIsNotNull(String ky, String id);
+	
+	int updateKyMoiByIdAndKyMoiIsNull(String ky, String id);
+	
+	int insertKhongKetChuyenIntoKyMoiById(String id,String newId,BigDecimal creTms,String userId,String kyMoi,String ngaythuchien,String ketchuyenStatus);
+	
+	void deleteByOldId(String oldId);
 }

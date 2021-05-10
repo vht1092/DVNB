@@ -1,11 +1,14 @@
 package com.dvnb.services;
 
+import java.math.BigDecimal;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.dvnb.entities.DvnbInvoiceMc;
@@ -65,4 +68,31 @@ public class DvnbInvoiceMcServiceImpl implements DvnbInvoiceMcService {
 	public void deleteByKyHoaDon(String ky) {
 		dvnbInvoiceMcRepo.deleteByKy(ky);
 	}
+
+	@Override
+	public int updateKyMoiByIdAndKyMoiIsNotNull(String ky, String id) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceMcRepo.updateKyMoiByIdAndKyMoiIsNotNull(ky, id);
+	}
+	
+	@Override
+	public int insertKhongKetChuyenIntoKyMoiById(String id, String newId, BigDecimal creTms, String userId, String kyMoi, String ngaythuchien, String ketchuyenStatus) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceMcRepo.insertKhongKetChuyenIntoKyMoiById(id, newId, creTms, userId, kyMoi, ngaythuchien,ketchuyenStatus);
+	}
+
+	@Override
+	public void deleteByOldId(String oldId) {
+		// TODO Auto-generated method stub
+		dvnbInvoiceMcRepo.deleteByOldId(oldId);
+	}
+
+	@Override
+	public int updateKyMoiByIdAndKyMoiIsNull(String ky, String id) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceMcRepo.updateKyMoiByIdAndKyMoiIsNull(ky, id);
+	}
+
 }
+
+

@@ -77,9 +77,11 @@ public class LoginForm extends VerticalLayout {
 		cbbAppname.addItem("DVNB");
 		cbbAppname.addItem("PBCP");
 		cbbAppname.addItem("DSQT");
+		cbbAppname.addItem("BATCH");
 		cbbAppname.setItemCaption("DVNB", "DỊCH VỤ NỘI BỘ");
 		cbbAppname.setItemCaption("PBCP", "PHÂN BỔ CHI PHÍ INVOICE");
 		cbbAppname.setItemCaption("DSQT", "ĐỐI SOÁT THANH QUYẾT TOÁN");
+		cbbAppname.setItemCaption("BATCH", "BATCH TRẢ GÓP");
 		contentLayout.addComponent(cbbAppname);
 		
 		cbbAppname.addValueChangeListener(item -> {
@@ -128,9 +130,12 @@ public class LoginForm extends VerticalLayout {
 		HttpServletRequest httpServletRequest = ((VaadinServletRequest)vaadinRequest).getHttpServletRequest();
 		String urlServer = getBaseUrl(httpServletRequest);
 		
+//		final Label lbHeader = new Label(
+//				"<div style=\"background-color: #0072c6;\">" + "<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/logo.png\"></img>" 
+//				+ " <span style=\"font-size:24px; color:#ffffff;font-weight: bold;text-transform: uppercase;\">TT Thẻ & NHĐT - DỊCH VỤ NỘI BỘ</span></div>");
 		final Label lbHeader = new Label(
-				"<div style=\"background-color: #0072c6;\">" + "<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/logo.png\"></img>" 
-				+ " <span style=\"font-size:24px; color:#ffffff;font-weight: bold;text-transform: uppercase;\">K.T&NHS - DỊCH VỤ NỘI BỘ</span></div>");
+				"<div style=\"background-color: #1c24ac;\">" + "<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/logo_new.png\" style='width: 237px;height: 105px;'></img>"				
+				+ " <span style=\"font-size:24px; color:#ffffff;font-weight: bold;text-transform: uppercase;\">TT Thẻ & NHĐT - DỊCH VỤ NỘI BỘ</span></div>");
 		lbHeader.setContentMode(ContentMode.HTML);
 
 		final Label lbFireFox = new Label("Ứng dụng dùng tốt trên <img class=\"v-icon\" src=\'" + urlServer + "/VAADIN/themes/mytheme/img/rsz_mozilla-firefox-icon.png'></img>"

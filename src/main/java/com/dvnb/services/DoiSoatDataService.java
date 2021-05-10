@@ -23,15 +23,21 @@ public interface DoiSoatDataService {
 	 * @return Page
 	 */
 	
+	public List<DoiSoatData> findAllMasterByFileIncomName(Set<String> incomingFileName);
+	
+	public List<DoiSoatData> findAllVisaByFileIncomName(Set<String> incomingFileName);
+	
 	public DoiSoatData findOneByCardnoAndApvcodeAndMagdAndAndReversalIdAndAdvdate(String cardno, String apvCode,String maGd,String reversalInd,String ngayDstqt);
 	
 	public Page<DoiSoatData> findAll(Pageable page);
 	
+	public int deleteAllByNgayAdvAndLttqtAndCardbrn(String ngayAdv, String lttqt, String cardbrn);
+	
 	public List<DoiSoatData> findAllTuNgayDenNgay(String tungay, String denngay);
 	
-	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcnt(String tungay, String denngay, String cardno, String apvcode, String dvcnt);
+	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcntAndCardtype(String tungay, String denngay, String cardno, String apvcode, String dvcnt,String cardtype);
 	
-	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCode(String tungay, String denngay, Set<String> magd, String cardno, String apvcode,String cardType);
+	public List<DoiSoatData> findAllTuNgayDenNgayAndMagdAndCardnoAndApvCodeAndCardtype(String tungay, String denngay, Set<String> magd, String cardno, String apvcode,String cardType);
 	
 	public List<DoiSoatData> findAllByLoaiTheAndLttqtAndNgayAdv(String loaithe, String lttqt, String ngayAdv);
 	
@@ -49,15 +55,25 @@ public interface DoiSoatDataService {
 	
 	public List<Object[]> findDoiSoatInfoByPanAndApvCode(String pan, String apvCode, String ngayGd);
 	
+	public List<Object[]> findDoiSoatCreditInfoByPanAndApvCode(String pan, String apvCode);
+	
 	public BigDecimal totalStQdVnd(String ngayAdv,String cardType);
 	
-	public List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay,String lttqt,String loaigd);
+	public List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGdAndCardtype(String tungay, String denngay,String lttqt,String loaigd,String cardType);
 	
-	public List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay,String lttqt,String loaigd);
+	public List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay,String lttqt,String loaigd,String cardType);
 	
 	public void updateNgayHoanTra(String ngayHoanTra,String soThe,String maCapPhep,String ngayGd,String trace); 
 	
+	public void updateNgayHoanTraById(String ngayHoanTra,String id); 
+	
 	public List<String> findMCIncomingFileNameByDate(String fromIncomingDate,String toIncomingDate); 
+	
+	public List<String> findVSIncomingFileNameByDate(String fromIncomingDate,String toIncomingDate); 
+	
+	public String findBinByCardtype(String crdBrn, int acctPrv);
+	
+	public String findAccountDescription(String casa);
 	
 	//1.1. GIAO DỊCH THẺ <MC/VS> DEBIT SCB THANH TOÁN HÀNG HÓA - GD được thanh quyết toán
 //	@Query(value = "SELECT * FROM DSQT_DATA " + 
@@ -100,4 +116,6 @@ public interface DoiSoatDataService {
 	
 	//7. GIAO DỊCH BÁO NỢ BẤT THƯỜNG THẺ <MC/VS> DEBIT SCB <TTHH/RTM>
 	public List<DoiSoatData> findAllGDBaoNoBatThuong(String curr);
+	
+	
 }

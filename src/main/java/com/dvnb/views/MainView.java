@@ -149,7 +149,24 @@ public class MainView extends HorizontalLayout implements View {
 		HttpServletRequest httpServletRequest = ((VaadinServletRequest)vaadinRequest).getHttpServletRequest();
 		String urlServer = getBaseUrl(httpServletRequest);
 		
-		final Label title = new Label("<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/logo_inside.png\"></img>");
+		String logoInside = "";
+		switch(appname) {
+			case "PBCP":
+				logoInside = "logo_inside_pbcp.png";
+				break;
+			case "DSQT":
+				logoInside = "logo_inside_dstqt.png";
+				break;
+			case "BATCH":
+				logoInside = "logo_inside_batchipp.png";
+				break;
+			default:
+				logoInside = "logo_inside_new.png";
+				break;
+		}
+		
+//		final Label title = new Label("<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/" + logoInside + "\"></img>");
+		final Label title = new Label("<img class=\"v-icon\" src=\"" + urlServer + "/VAADIN/themes/mytheme/img/" + logoInside + "\" style='width: 215px;height: 90px;'></img>");
 		title.setContentMode(ContentMode.HTML);//.addStyleName("title-header");
 		//title.setSizeUndefined();
 		

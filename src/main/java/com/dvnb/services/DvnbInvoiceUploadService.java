@@ -15,5 +15,6 @@ public interface DvnbInvoiceUploadService {
 	
 	public List<InvoiceUpload> searchAllInvoiceUploadDetail(String ky, String crdbrn) throws SQLException ;
 	
-
+	public List<Object[]> getDataInvoiceUploadByBIN(String ky, String crdbrn) throws SQLException;
+	
 }

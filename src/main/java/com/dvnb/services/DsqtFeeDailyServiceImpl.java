@@ -28,10 +28,17 @@ public class DsqtFeeDailyServiceImpl implements DsqtFeeDailyService {
 		dsqtFeeDailyRepo.save(feeDaily);
 		
 	}
+	
 	@Override
 	public List<DsqtFeeDaily> findAllByNgayHachToan(String ngayHachToan) {
 		// TODO Auto-generated method stub
 		return dsqtFeeDailyRepo.findAllByNgayHachToan(ngayHachToan);
+	}
+
+	@Override
+	public DsqtFeeDaily findOneByLoaiTheAndNgayAdvAndLoaiGdAndLoaiTienTqt(String loaiThe, String ngayAdv, String loaiGd, String loaiTienTqt) {
+		// TODO Auto-generated method stub
+		return dsqtFeeDailyRepo.findOneByLoaiTheAndNgayAdvAndLoaiGdAndLoaiTienTqt(loaiThe, ngayAdv, loaiGd, loaiTienTqt);
 	}
 
 

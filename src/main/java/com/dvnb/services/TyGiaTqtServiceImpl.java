@@ -36,6 +36,12 @@ public class TyGiaTqtServiceImpl implements TyGiaTqtService {
 		return tyGiaTqtRepo.findAllByNgayAdvAndCardType(ngayAdv,cardType);
 		
 	}
+
+	@Override
+	public TyGiaTqt calcTyGiaMastercardByNgayAdvAndCardType(String ngayAdv, String cardType) {
+		// TODO Auto-generated method stub
+		return tyGiaTqtRepo.calcTyGiaMastercardByNgayAdvAndCardType(ngayAdv, cardType);
+	}
 	
 
 }

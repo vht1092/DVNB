@@ -31,7 +31,7 @@ public class DvnbTyGia implements Serializable {
 	@Column(name = "UPD_UID", nullable = false, length = 12)
 	private String updUid;
 
-	@Column(nullable=false, length=6)
+	@Column(name = "KY", nullable = false, length = 6)
 	private String ky;
 
 	@Column(name = "NGAY_TYGIA", nullable = false, length = 20)

@@ -25,8 +25,26 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 	private DoiSoatDataRepo doiSoatDataRepo;
 
 	@Override
+	public List<DoiSoatData> findAllMasterByFileIncomName(Set<String> incomingFileName) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.findAllMasterByFileIncomName(incomingFileName);
+	}
+
+	@Override
+	public List<DoiSoatData> findAllVisaByFileIncomName(Set<String> incomingFileName) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.findAllVisaByFileIncomName(incomingFileName);
+	}
+	
+	@Override
 	public Page<DoiSoatData> findAll(Pageable page) {
 		return doiSoatDataRepo.findAll(page);
+	}
+	
+	@Override
+	public int deleteAllByNgayAdvAndLttqtAndCardbrn(String ngayAdv, String lttqt, String cardbrn) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.deleteAllByNgayAdvAndLttqtAndCardbrn(ngayAdv, lttqt, cardbrn);
 	}
 
 	@Override
@@ -35,15 +53,15 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 	}
 	
 	@Override
-	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcnt(String tungay, String denngay, String cardno, String apvcode, String dvcnt) {
+	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcntAndCardtype(String tungay, String denngay, String cardno, String apvcode, String dvcnt,String cardtype) {
 		// TODO Auto-generated method stub
-		return doiSoatDataRepo.findAllTuNgayDenNgayAndPanAndApvCodeAndDvcnt(tungay, denngay, cardno, apvcode,dvcnt);
+		return doiSoatDataRepo.findAllTuNgayDenNgayAndPanAndApvCodeAndDvcntAndCardtype(tungay, denngay, cardno, apvcode,dvcnt,cardtype);
 	}
 	
 	@Override
-	public List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCode(String tungay, String denngay, Set<String> magd, String cardno, String apvcode,String cardType) {
+	public List<DoiSoatData> findAllTuNgayDenNgayAndMagdAndCardnoAndApvCodeAndCardtype(String tungay, String denngay, Set<String> magd, String cardno, String apvcode,String cardType) {
 		// TODO Auto-generated method stub
-		return doiSoatDataRepo.findAllTuNgayDenNgayAndPanAndApvCode(tungay, denngay, magd, cardno, apvcode,cardType);
+		return doiSoatDataRepo.findAllTuNgayDenNgayAndMagdAndCardnoAndApvCodeAndCardtype(tungay, denngay, magd, cardno, apvcode,cardType);
 	}
 
 
@@ -93,6 +111,13 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 		// TODO Auto-generated method stub
 		return doiSoatDataRepo.findDoiSoatInfoByPanAndApvCode(pan, apvCode,ngayGd);
 	}
+	
+	@Override
+	public List<Object[]> findDoiSoatCreditInfoByPanAndApvCode(String pan, String apvCode) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.findDoiSoatCreditInfoByPanAndApvCode(pan, apvCode);
+	}
+
 
 	@Override
 	public DoiSoatData findOneByCardnoAndApvcodeAndMagdAndAndReversalIdAndAdvdate(String cardno, String apvCode,String maGd,String reversalInd,String ngayadv) {
@@ -107,15 +132,15 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 	}
 	
 	@Override
-	public List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay, String lttqt, String loaigd) {
+	public List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGdAndCardtype(String tungay, String denngay, String lttqt, String loaigd,String cardType) {
 		// TODO Auto-generated method stub
-		return doiSoatDataRepo.findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGd(tungay, denngay, lttqt, loaigd);
+		return doiSoatDataRepo.findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGdAndCardtype(tungay, denngay, lttqt, loaigd,cardType);
 	}
 	
 	@Override
-	public List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay, String lttqt, String loaigd) {
+	public List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(String tungay, String denngay, String lttqt, String loaigd,String cardType) {
 		// TODO Auto-generated method stub
-		return doiSoatDataRepo.findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(tungay, denngay, lttqt, loaigd);
+		return doiSoatDataRepo.findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(tungay, denngay, lttqt, loaigd,cardType);
 	}
 
 
@@ -126,11 +151,36 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 	}
 	
 	@Override
+	public void updateNgayHoanTraById(String ngayHoanTra, String id) {
+		// TODO Auto-generated method stub
+		doiSoatDataRepo.updateNgayHoanTraById(ngayHoanTra, id);
+	}
+	
+	@Override
 	public List<String> findMCIncomingFileNameByDate(String fromIncomingDate,String toIncomingDate) {
 		// TODO Auto-generated method stub
 		return doiSoatDataRepo.findMCIncomingFileNameByDate(fromIncomingDate,toIncomingDate);
 	}
 
+	
+	@Override
+	public List<String> findVSIncomingFileNameByDate(String fromIncomingDate,String toIncomingDate) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.findVSIncomingFileNameByDate(fromIncomingDate,toIncomingDate);
+	}
+	
+	@Override
+	public String findBinByCardtype(String crdBrn, int acctPrv) {
+		return doiSoatDataRepo.findBinByCardtype(crdBrn, acctPrv);
+	}
+
+	@Override
+	public String findAccountDescription(String casa) {
+		// TODO Auto-generated method stub
+		return doiSoatDataRepo.findAccountDescription(casa);
+	}
+
+	
 	@Override
 	public List<DoiSoatData> findAllGDTTHHDuocTQT(String curr) {
 		// TODO Auto-generated method stub
@@ -210,10 +260,6 @@ public class DoiSoatDataServiceImpl implements DoiSoatDataService {
 	}
 
 	
-
-	
-	
-
 
 	
 }

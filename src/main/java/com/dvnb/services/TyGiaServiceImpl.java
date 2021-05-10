@@ -1,5 +1,7 @@
 package com.dvnb.services;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import com.dvnb.entities.DvnbTyGia;
 import com.dvnb.repositories.TyGiaRepo;
 
 @Service("tyGiaService")
+@Transactional
 public class TyGiaServiceImpl implements TyGiaService {
 
 	@Autowired
@@ -27,6 +30,12 @@ public class TyGiaServiceImpl implements TyGiaService {
 	public void save(DvnbTyGia fdsTyGia) {
 
 		tyGiaRepo.save(fdsTyGia);
+	}
+
+	@Override
+	public void deleteByKyAndCrdBrn(String ky, String crdBrn) {
+		// TODO Auto-generated method stub
+		tyGiaRepo.deleteByKyAndCrdBrn(ky, crdBrn);
 	}
 	
 

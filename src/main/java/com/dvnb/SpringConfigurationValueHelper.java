@@ -54,6 +54,8 @@ public class SpringConfigurationValueHelper {
 	
 	private String cardtype;
 	
+	private String ngayAdv;
+	
 	public String appname;
 	
 	public int sTimeRefreshContent() {
@@ -126,6 +128,14 @@ public class SpringConfigurationValueHelper {
 
 	public void setCardtype(String cardtype) {
 		this.cardtype = cardtype;
+	}
+
+	public String getNgayAdv() {
+		return ngayAdv;
+	}
+
+	public void setNgayAdv(String ngayAdv) {
+		this.ngayAdv = ngayAdv;
 	}
 	
 	

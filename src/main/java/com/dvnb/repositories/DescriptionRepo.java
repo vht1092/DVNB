@@ -14,6 +14,9 @@ public interface DescriptionRepo extends CrudRepository<DvnbDescription, Long> {
 	@Query(nativeQuery = true, value = "SELECT * FROM FPT.DVNB_DESCRIPTION WHERE TYPE = :type ORDER BY SEQUENCENO ASC")
 	public Iterable<DvnbDescription> findAllByTypeByOrderBySequencenoAsc(@Param(value = "type") String type);
 	
+	@Query(nativeQuery = true, value = "SELECT * FROM FPT.DVNB_DESCRIPTION WHERE TYPE = :type ORDER BY SEQUENCENO DESC")
+	public Iterable<DvnbDescription> findAllByTypeByOrderBySequencenoDesc(@Param(value = "type") String type);
+	
 	@Query(nativeQuery = true, value = "SELECT 'A' || (MAX(SUBSTR(ID,2,2))+1) FROM FPT.DVNB_DESCRIPTION WHERE ID LIKE 'A%' AND TYPE <> 'ACTION' AND ID<'A98'")
 	public String getNextIdContentDetail();
 }

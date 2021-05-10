@@ -18,47 +18,86 @@ import com.dvnb.entities.DoiSoatData;
 @Repository
 public interface DoiSoatDataRepo extends JpaRepository<DoiSoatData, String> {
 
+	@Query(value = "SELECT to_char(SYSDATE, 'yyyyMMddHH24MISS') CRE_TMS,NULL UPD_TMS,NULL USR_ID,NULL UPD_UID,to_char(SYSDATE,'yyyyMMddHH24MISS')||LPAD(ROWNUM,7,0) ID,NULL NGAY_ADV,NULL TEN_CHU_THE,NULL CASA, PAN SO_THE,ECD2@IM(PAN,'A') PAN,\r\n" + 
+			"PROCESSING_CODE MA_GD,SUBSTR(DATES,0,6) NGAY_GD,SUBSTR(FILE_NAME, INSTR(FILE_NAME,'TT112T0.')+8,19)  NGAY_FILE_INCOMING,AMOUNT_TRANSACTION ST_GD,\r\n" + 
+			"AMOUNT_RECONCILIATION ST_TQT,NVL(AMOUNT_CARDHOLDER_BILLING,0) ST_QD_VND,CURRENT_CODE_TRANSACTION LTGD,\r\n" + 
+			"(SELECT CURR_CODE FROM DSQT_CURRENCY WHERE CURR_NUM=CURRENT_CODE_RECONCILIATION) LTTQT,NVL(AMT_FEE_RECONCILIATION,0) INTERCHANGE,\r\n" + 
+			"APPROVAL_CODE MA_CAP_PHEP,MERCHANT DVCNT,CASE WHEN ADITIONAL_DATA LIKE '%25007R%' THEN 'R' ELSE ' ' END REVERSAL_IND,\r\n" + 
+			"NULL ISSUER_CHARGE,NULL MERCHANT_CITY,0 ST_TRICH_NO_KH_GD,0 STGD_NGUYEN_TE_GD,0 LOAI_TIEN_NGUYEN_TE_GD,0 PHI_ISA_GD,0 PHI_RTM_GD,0 STGD_NGUYEN_TE_CHENH_LECH, \r\n" + 
+			"0 STGD_CHENH_LECH_DO_TY_GIA,0 TY_GIA_TRICH_NO,0 SO_TIEN_GD_HOAN_TRA_TRUY_THU,0 PHI_ISA_HOAN_TRA_TRUY_THU,0 VAT_PHI_ISA_HOAN_TRA_TRUY_THU,\r\n" + 
+			"0 PHI_RTM_HOAN_TRA_TRUY_THU,0 VAT_PHI_RTM_HOAN_TRA_TRUY_THU,0 TONG_PHI_VAT_HOAN_TRA_TRUY_THU,0 TONG_HOAN_TRA_TRUY_THU,0 PHI_XU_LY_GD, \r\n" + 
+			"' 'DVPHT,' ' TRACE, ' ' STATUS_CW, CARD_ACCEPTOR_BUSINESS_CODE MCC, ' ' CIF, ' ' CRD_PGM, ' ' NGAY_HOAN_TRA, ' ' TEN_CHU_TK,0 VAT_PHI_ISA_GD,0 VAT_PHI_RTM_GD,' ' LOC, ' ' CARD_BRN\r\n" + 
+			"FROM CCPS.INCOMING_MASTER A\r\n" + 
+			"WHERE FILE_NAME IN :incomingFileName", nativeQuery = true)
+	List<DoiSoatData> findAllMasterByFileIncomName(@Param("incomingFileName") Set<String> incomingFileName);
+	
+	@Query(value = "SELECT to_char(SYSDATE, 'yyyyMMddHH24MISS') CRE_TMS, NULL UPD_TMS, NULL USR_ID, NULL UPD_UID,\r\n" + 
+			"to_char(SYSDATE,'yyyyMMddHH24MISS')||LPAD(ROWNUM,7,0) ID,NULL NGAY_ADV,NULL TEN_CHU_THE,NULL CASA, \r\n" + 
+			"NVL(REPLACE(PX_IRPANMAP_PANMASK,'XXXXXX',PX_IRPANMAP_MID),ACC_NUMBER) SO_THE,NVL(PX_IRPANMAP_PAN,ECD2@IM(ACC_NUMBER,'A')) PAN, TXN_CODE MA_GD,\r\n" + 
+			"SUBSTR(TXN_DT,3,8) NGAY_GD,to_char(to_date(PST_DT,'YYYYMMDD'), 'YYYY-MM-DD')||'-00-00-00' NGAY_FILE_INCOMING,\r\n" + 
+			"NVL(SOURCE_AMT,0) ST_GD, 0 ST_TQT,NVL(DES_AMT,0) ST_QD_VND,SOURCE_CUR_CODE LTGD, SETTLEMENT_FLAG LTTQT,\r\n" + 
+			"NVL(INTERCHANGE_FEE_AMT,0) INTERCHANGE, AUTH_CODE MA_CAP_PHEP,MERC_NAME DVCNT,' ' REVERSAL_IND, \r\n" + 
+			"ISSUER_CHARGE,MERC_CITY MERCHANT_CITY,0 ST_TRICH_NO_KH_GD,0 STGD_NGUYEN_TE_GD,0 LOAI_TIEN_NGUYEN_TE_GD,0 PHI_ISA_GD,0 PHI_RTM_GD,0 STGD_NGUYEN_TE_CHENH_LECH,  \r\n" + 
+			"0 STGD_CHENH_LECH_DO_TY_GIA,0 TY_GIA_TRICH_NO,0 SO_TIEN_GD_HOAN_TRA_TRUY_THU,0 PHI_ISA_HOAN_TRA_TRUY_THU,0 VAT_PHI_ISA_HOAN_TRA_TRUY_THU, \r\n" + 
+			"0 PHI_RTM_HOAN_TRA_TRUY_THU,0 VAT_PHI_RTM_HOAN_TRA_TRUY_THU,0 TONG_PHI_VAT_HOAN_TRA_TRUY_THU,0 TONG_HOAN_TRA_TRUY_THU,0 PHI_XU_LY_GD,  \r\n" + 
+			"' ' DVPHT,' ' TRACE, ' ' STATUS_CW, MCC, ' ' CIF, CARD_PRG CRD_PGM, NULL NGAY_HOAN_TRA, ' ' TEN_CHU_TK,0 VAT_PHI_ISA_GD,0 VAT_PHI_RTM_GD, LOC, ' ' CARD_BRN \r\n" + 
+			"FROM CCPS.INCOMING_VISA_VIEW A \r\n" + 
+			"LEFT JOIN IR_PAN_MAP@IM B ON A.ACC_NUMBER = B.PX_IRPANMAP_PANMASK AND A.LOC = B.F9_IRPANMAP_LOC\r\n" + 
+			"WHERE PST_DT IN :incomingFileName", nativeQuery = true)
+	List<DoiSoatData> findAllVisaByFileIncomName(@Param("incomingFileName") Set<String> incomingFileName);
+	
 	
 	@Query(value = "SELECT * FROM DSQT_DATA " + 
 			"WHERE ST_TRICH_NO_KH_GD <> 0 AND SO_THE=:cardno AND MA_CAP_PHEP=:apvcode AND MA_GD=:maGd AND REVERSAL_IND=:reversalInd " + 
-			"AND NGAY_ADV=:ngayadv", nativeQuery = true)
+			"AND NGAY_ADV=:ngayadv AND ROWNUM=1", nativeQuery = true)
 	DoiSoatData findOneByCardnoAndApvcodeAndMagdAndAndReversalIdAndAdvdate(@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("maGd") String maGd,@Param("reversalInd") String reversalInd,@Param("ngayadv") String ngayadv);
 	
 	Page<DoiSoatData> findAll(Pageable page);
 	
+	@Modifying
+	@Query(value = "DELETE DSQT_DATA\r\n" + 
+			"WHERE NGAY_ADV=:ngayAdv\r\n" + 
+			"AND ('All'=:lttqt OR LTTQT=:lttqt)\r\n" + 
+			"AND ('All'=:cardbrn OR CARD_BRN=:cardbrn)", nativeQuery = true)
+	int deleteAllByNgayAdvAndLttqtAndCardbrn(@Param("ngayAdv") String ngayAdv,@Param("lttqt") String lttqt,@Param("cardbrn") String cardbrn);
 	
 	@Query(value = "SELECT * FROM DSQT_DATA " + 
 			"WHERE NGAY_ADV BETWEEN :tungay AND :denngay", nativeQuery = true)
 	List<DoiSoatData> findAllTuNgayDenNgay(@Param("tungay") String tungay,@Param("denngay") String denngay);
 	
-	@Query(value = "SELECT * FROM DSQT_DATA " + 
-			"WHERE NGAY_ADV BETWEEN :tungay AND :denngay " + 
-			"AND ('All'=:cardno OR SO_THE=:cardno) " + 
-			"AND ('All'=:apvcode OR MA_CAP_PHEP=:apvcode) " + 
-			"AND ('All'=:dvcnt OR DVCNT LIKE '%' || :dvcnt || '%') ", nativeQuery = true)
-	List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcnt(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("dvcnt") String dvcnt);
+	@Query(value = "SELECT * FROM DSQT_DATA  \r\n" + 
+			"WHERE NGAY_ADV BETWEEN :tungay AND :denngay  \r\n" + 
+			"AND ('All'=:cardno OR SO_THE=:cardno)  \r\n" + 
+			"AND ('All'=:apvcode OR MA_CAP_PHEP=:apvcode)  \r\n" + 
+			"AND ('All'=:dvcnt OR DVCNT LIKE '%' || :dvcnt || '%')  \r\n" + 
+			"AND ('All'=:cardType OR CARD_BRN=:cardType)", nativeQuery = true)
+	List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCodeAndDvcntAndCardtype(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("dvcnt") String dvcnt,@Param("cardType") String cardType);
 	
 	@Query(value = "SELECT * FROM DSQT_DATA " + 
 			"WHERE NGAY_ADV BETWEEN :tungay AND :denngay " + 
 			"AND ('All'=:cardno OR SO_THE=:cardno) " + 
 			"AND ('All'=:apvcode OR MA_CAP_PHEP=:apvcode) " +
 			"AND ('999' IN :magd OR SUBSTR(MA_GD,0,2) IN :magd) " + 
-			"AND ('All'=:cardType " + 
-			"    OR ('MD'=:cardType AND (SUBSTR(SO_THE,1,7) IN (5471390,5471391,5507960,5507961) OR SUBSTR(SO_THE,1,6)=524188)) " + 
-			"    OR ('MC'=:cardType AND SUBSTR(SO_THE,1,6) IN (510235,512454,545579,554627)) " + 
-			"    OR ('VS'=:cardType AND (SUBSTR(SO_THE,1,7) IN (4895160,4895170,4895180) OR SUBSTR(SO_THE,1,8)=48951899)) " + 
-			"    OR ('VSD'=:cardType AND SUBSTR(SO_THE,1,6)=453618) " + 
-			")", nativeQuery = true)
-	List<DoiSoatData> findAllTuNgayDenNgayAndPanAndApvCode(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("magd") Set<String> magd,@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("cardType") String cardType);
+			"AND ('All'=:cardType OR CARD_BRN=:cardType)", nativeQuery = true)
+	List<DoiSoatData> findAllTuNgayDenNgayAndMagdAndCardnoAndApvCodeAndCardtype(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("magd") Set<String> magd,@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("cardType") String cardType);
 	
-	@Query(value = "SELECT * FROM DSQT_DATA A\r\n" + 
-			"WHERE NGAY_ADV=:ngayAdv\r\n" + 
-			"AND ('All'=:lttqt OR LTTQT=:lttqt)\r\n" + 
-			"AND ('All'=:loaiThe\r\n" + 
-			"OR ('MD'=:loaiThe AND (SUBSTR(SO_THE,1,7) IN (5471390,5471391,5507960,5507961) OR SUBSTR(SO_THE,1,6)=524188))\r\n" + 
-			"OR ('MC'=:loaiThe AND SUBSTR(SO_THE,1,6) IN (510235,512454,545579,554627))\r\n" + 
-			"OR ('VS'=:loaiThe AND (SUBSTR(SO_THE,1,7) IN (4895160,4895170,4895180) OR SUBSTR(SO_THE,1,8)=48951899))\r\n" + 
-			"OR ('VSD'=:loaiThe AND SUBSTR(SO_THE,1,6)=453618))", nativeQuery = true)
+//	@Query(value = "SELECT * FROM DSQT_DATA " + 
+//			"WHERE NGAY_ADV BETWEEN :tungay AND :denngay " + 
+//			"AND ('All'=:cardno OR SO_THE=:cardno) " + 
+//			"AND ('All'=:apvcode OR MA_CAP_PHEP=:apvcode) " +
+//			"AND ('999' IN :magd OR SUBSTR(MA_GD,0,2) IN :magd) " + 
+//			"AND ('All'=:cardType " + 
+//			"    OR ('MD'=:cardType AND (SUBSTR(SO_THE,1,7) IN (5471390,5471391,5507960,5507961) OR SUBSTR(SO_THE,1,6)=524188)) " + 
+//			"    OR ('MC'=:cardType AND SUBSTR(SO_THE,1,6) IN (510235,512454,545579,554627)) " + 
+//			"    OR ('VS'=:cardType AND (SUBSTR(SO_THE,1,7) IN (4895160,4895170,4895180) OR SUBSTR(SO_THE,1,8)=48951899)) " + 
+//			"    OR ('VSD'=:cardType AND SUBSTR(SO_THE,1,6)=453618) " + 
+//			")", nativeQuery = true)
+//	List<DoiSoatData> findAllTuNgayDenNgayAndMagdAndCardnoAndApvCodeAndCardtype(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("cardno") String cardno,@Param("apvcode") String apvcode,@Param("cardType") String cardType);
+	
+	@Query(value = "SELECT * FROM DSQT_DATA A \r\n" + 
+			"WHERE NGAY_ADV=:ngayAdv \r\n" + 
+			"AND ('All'=:lttqt OR LTTQT=:lttqt) \r\n" + 
+			"AND ('All'=:loaiThe OR CARD_BRN=:loaiThe)", nativeQuery = true)
 	List<DoiSoatData> findAllByLoaiTheAndLttqtAndNgayAdv(@Param("loaiThe") String loaiThe,@Param("lttqt") String lttqt, @Param("ngayAdv") String ngayAdv);
 	
 	@Query(value = "SELECT A.EMB_NAME,TRIM(PX_OA179_CB_ACCT_NUM) ACC_NUM,CRD_STAT,BRCH_CDE " + 
@@ -130,7 +169,8 @@ public interface DoiSoatDataRepo extends JpaRepository<DoiSoatData, String> {
 	
 	@Query(value = "SELECT * FROM (   \r\n" + 
 			"    SELECT B.PAN,B.EMB_NAME,A.APV_CODE,A.DR_AMOUNT,A.DR_LCY_AMOUNT,A.CCY,A.ISA_FEE,CASE WHEN TRAN_TYPE_ID LIKE 'C%' THEN A.FEE ELSE 0 END RTM_FEE,A.BRANCH_CODE,A.AUTH_STATUS    \r\n" + 
-			"    ,A.TRACE_NO,A.CASA_ACCOUNT_SEND,CURR_CODE,TRN_DT,CUST_ID,TRIM(CARD_TYPE_ID) CARD_TYPE, AC_DESC    \r\n" + 
+			"    ,A.TRACE_NO,A.CASA_ACCOUNT_SEND,CURR_CODE,TRN_DT,CUST_ID,TRIM(CARD_TYPE_ID) CARD_TYPE, ' ' AC_DESC    \r\n" + 
+			"	 ,A.ISA_VAT,CASE WHEN TRAN_TYPE_ID LIKE 'C%' THEN A.VAT ELSE 0 END RTM_VAT,CR_AMOUNT,CR_LCY_AMOUNT\r\n" + 
 			"    FROM (  \r\n" + 
 			"        WITH t AS\r\n" + 
 			"        (\r\n" + 
@@ -151,41 +191,89 @@ public interface DoiSoatDataRepo extends JpaRepository<DoiSoatData, String> {
 			"            CCPS.DW006   \r\n" + 
 			"        WHERE PX_DW006_OWN_PAN IN ((SELECT * FROM t),:pan)\r\n" + 
 			"    ) B  \r\n" + 
-			"    LEFT JOIN fpt.dwh_credit_card_tran A ON A.PAN=B.PAN AND A.APV_CODE=TO_NUMBER(:apvCode) AND :apvCode<>'00000Y'  \r\n" + 
+			"    LEFT JOIN fpt.dwh_credit_card_tran A ON A.PAN=B.PAN AND LPAD(A.APV_CODE,6,0)=LPAD(:apvCode,6,0) AND REGEXP_LIKE(:apvCode,'^[0-9]+$')  \r\n" + 
+			"    AND DR_AMOUNT<>0 AND DR_LCY_AMOUNT<>0\r\n" +
 			"    LEFT JOIN DSQT_CURRENCY CURR ON A.CCY=TO_NUMBER(CURR_NUM)  \r\n" + 
-			"    LEFT JOIN FCUSR01.STTM_CUST_ACCOUNT@EXADATA ON CUST_AC_NO=A.CASA_ACCOUNT_SEND  \r\n" + 
+//			"    LEFT JOIN FCUSR01.STTM_CUST_ACCOUNT@EXADATA ON CUST_AC_NO=A.CASA_ACCOUNT_SEND  \r\n" + 
 			"    ORDER BY ABS((TO_DATE(TRN_DT, 'DD-MON-RR')-TO_DATE(:ngayGd, 'YYMMDD'))) ASC  \r\n" + 
 			") WHERE ROWNUM=1", nativeQuery = true)
 	List<Object[]> findDoiSoatInfoByPanAndApvCode(@Param("pan") String pan,@Param("apvCode") String apvCode,@Param("ngayGd") String ngayGd);
 	
-	@Query(value = "SELECT SUM(ST_QD_VND) FROM DSQT_DATA " + 
-			"WHERE NGAY_ADV=:ngayAdv " + 
-			"AND LTTQT<>'VND' " +
-			"AND ('All'= :cardType " + 
-			"        OR ('MD'=:cardType AND (SUBSTR(SO_THE,1,7) IN (5471390,5471391,5507960,5507961) OR SUBSTR(SO_THE,1,6)=524188)) " + 
-			"        OR ('MC'=:cardType AND SUBSTR(SO_THE,1,6) IN (510235,512454,545579,554627)) " + 
-			"        OR ('VS'=:cardType AND (SUBSTR(SO_THE,1,7) IN (4895160,4895170,4895180) OR SUBSTR(SO_THE,1,8)=48951899)) " + 
-			"        OR ('VSD'=:cardType AND SUBSTR(SO_THE,1,6)=453618)" + 
-			"     )", nativeQuery = true)
+	@Query(value = "SELECT B.PAN,B.EMB_NAME,A.FX_DW009_APV_CDE,A.F9_DW009_TXN_AMT,A.F9_DW009_AMT_LCL_CRNCY,A.F9_DW009_TXN_CRNCY_CDE, \r\n" + 
+			"ROUND(F9_DW009_COMM_CHRG*10/11,0) ISA_FEE,ROUND(F9_DW009_COMM_CHRG/11,0) VAT_ISA_FEE,F9_DW009_TXN_DT,FX_DW009_CRD_PGM CARD_TYPE,TRIM(B.BRCH_CDE)||'-'||TRIM(C.BRANCH_NAME) BRCH,LOC      \r\n" + 
+			"FROM (    \r\n" + 
+			"    SELECT        \r\n" + 
+			"        trim(trim(FX_DW005_EMB_LST_NM) || ' ' || trim(FX_DW005_EMB_MID_NM)) || ' ' || trim(FX_DW005_EMB_NAME) AS EMB_NAME,        \r\n" + 
+			"        PX_DW005_PAN PAN,FX_DW005_BRCH_CDE BRCH_CDE,F9_DW005_LOC_ACCT LOC    \r\n" + 
+			"    FROM            \r\n" + 
+			"        CCPS.DW005      \r\n" + 
+			"    WHERE PX_DW005_PAN=:pan\r\n" + 
+			"    UNION ALL            \r\n" + 
+			"    SELECT            \r\n" + 
+			"        trim(trim(FX_DW006_EMB_LST_NM) || ' ' || trim(FX_DW006_EMB_MID_NM)) || ' ' || trim(FX_DW006_EMB_NAME) AS EMB_NAME,        \r\n" + 
+			"        PX_DW006_OWN_PAN PAN,FX_DW006_BRCH_CDE BRCH_CDE,F9_DW006_LOC_ACCT LOC    \r\n" + 
+			"    FROM        \r\n" + 
+			"        CCPS.DW006     \r\n" + 
+			"    WHERE PX_DW006_OWN_PAN=:pan\r\n" + 
+			") B    \r\n" + 
+			"LEFT JOIN CCPS.DW009 A ON A.PX_DW009_OWN_PAN=B.PAN AND LPAD(A.FX_DW009_APV_CDE,6,0)=LPAD(:apvCode,6,0) AND REGEXP_LIKE(:apvCode,'^[0-9]+$') AND F9_DW009_SETL_AMT>0 \r\n" + 
+			"LEFT JOIN FPT.FULL_BRANCH C ON TRIM(B.BRCH_CDE)=TRIM(C.BRANCH_CODE)", nativeQuery = true)
+	List<Object[]> findDoiSoatCreditInfoByPanAndApvCode(@Param("pan") String pan,@Param("apvCode") String apvCode);
+	
+	
+	@Query(value = "SELECT SUM(ST_QD_VND) FROM DSQT_DATA  \r\n" + 
+			"WHERE NGAY_ADV=:ngayAdv  \r\n" + 
+			"AND LTTQT<>'VND' \r\n" + 
+			"AND ('All'= :cardType OR CARD_BRN=:cardType)", nativeQuery = true)
 	BigDecimal totalStQdVnd(@Param("ngayAdv") String ngayAdv,@Param("cardType") String cardType);
 	
-	@Query(value = "SELECT * FROM DSQT_DATA\r\n" + 
-			"WHERE ('All'=:lttqt OR LTTQT=:lttqt) AND NGAY_ADV BETWEEN :tungay AND :denngay\r\n" + 
-			"AND ('All'=:loaigd AND ((MA_GD LIKE '00%' AND STATUS_CW=' ') OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ')\r\n" + 
-			"OR (MA_GD LIKE '01%' AND STATUS_CW=' ' AND REVERSAL_IND=' ') OR (MA_GD LIKE '01%' AND STATUS_CW<>' '))\r\n" + 
-			"OR 'GDRTM'=:loaigd AND ((MA_GD LIKE '01%' AND STATUS_CW=' ' AND REVERSAL_IND=' ') OR (MA_GD LIKE '01%' AND STATUS_CW<>' '))\r\n" + 
-			"OR 'GDTTHH'=:loaigd AND ((MA_GD LIKE '00%' AND STATUS_CW=' ') OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ')))\r\n" + 
-			"AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0 AND NGAY_HOAN_TRA IS NULL", nativeQuery = true)
-	List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGd(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("lttqt") String lttqt,@Param("loaigd") String loaigd);
+	@Query(value = "SELECT *\r\n" + 
+			"FROM DSQT_DATA \r\n" + 
+			"WHERE ('All'=:lttqt OR LTTQT=:lttqt) AND CARD_BRN=:cardType AND NGAY_ADV BETWEEN :tungay AND :denngay\r\n" + 
+			"AND ('GDRTM'=:loaigd AND (\r\n" + 
+			"    :cardType='MD' AND (((MA_GD LIKE '01%' OR MA_GD LIKE '12%') AND STATUS_CW=' ' AND REVERSAL_IND<>'R')  \r\n" + 
+			"                    OR ((MA_GD LIKE '01%' OR MA_GD LIKE '12%') AND STATUS_CW<>' '))\r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='VSD' AND ((MA_GD LIKE '07%') OR (MA_GD LIKE '27%' AND STATUS_CW<>' ')) \r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='MC' AND LTTQT='USD' AND MA_GD LIKE '01%' AND REVERSAL_IND='R'\r\n" + 
+			"    OR :cardType='VS' AND LTTQT='USD' AND MA_GD LIKE '27%')\r\n" + 
+			"    \r\n" + 
+			"OR 'GDTTHH'=:loaigd AND (\r\n" + 
+			"    :cardType='MD' AND ((MA_GD LIKE '00%' AND STATUS_CW=' ')  \r\n" + 
+			"    OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ') )\r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='VSD' AND (((MA_GD LIKE '05%' AND STATUS_CW=' ') OR (MA_GD LIKE '25%' AND STATUS_CW<>' ') OR MA_GD LIKE '26%')) \r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='MC' AND LTTQT='USD' AND (MA_GD LIKE '20%' OR (MA_GD LIKE '00%' AND REVERSAL_IND='R'))\r\n" + 
+			"    OR :cardType='VS' AND LTTQT='USD' AND (MA_GD LIKE '25%' OR (MA_GD LIKE '06%' AND MERCHANT_CITY NOT LIKE '%Visa Direct%'))\r\n" + 
+			"))\r\n" + 
+			"AND NGAY_HOAN_TRA IS NULL", nativeQuery = true)
+	List<DoiSoatData> findGDPhatSinhHoanTraLechTuNgayDenNgayAndLttqtAndLoaiGdAndCardtype(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("lttqt") String lttqt,@Param("loaigd") String loaigd,@Param("cardType") String cardType);
 	
-	@Query(value = "SELECT * FROM DSQT_DATA\r\n" + 
-			"WHERE ('All'=:lttqt OR LTTQT=:lttqt) AND NGAY_ADV BETWEEN :tungay AND :denngay\r\n" + 
-			"AND ('All'=:loaigd AND ((MA_GD LIKE '00%' AND STATUS_CW=' ') OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ')\r\n" + 
-			"OR (MA_GD LIKE '01%' AND STATUS_CW=' ' AND REVERSAL_IND=' ') OR (MA_GD LIKE '01%' AND STATUS_CW<>' '))\r\n" + 
-			"OR 'GDRTM'=:loaigd AND ((MA_GD LIKE '01%' AND STATUS_CW=' ' AND REVERSAL_IND=' ') OR (MA_GD LIKE '01%' AND STATUS_CW<>' '))\r\n" + 
-			"OR 'GDTTHH'=:loaigd AND ((MA_GD LIKE '00%' AND STATUS_CW=' ') OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ')))\r\n" + 
-			"AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0 AND NGAY_HOAN_TRA IS NOT NULL", nativeQuery = true)
-	List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("lttqt") String lttqt,@Param("loaigd") String loaigd);
+	@Query(value = "SELECT *\r\n" + 
+			"FROM DSQT_DATA \r\n" + 
+			"WHERE ('All'=:lttqt OR LTTQT=:lttqt) AND CARD_BRN=:cardType AND NGAY_ADV BETWEEN :tungay AND :denngay\r\n" + 
+			"AND ('GDRTM'=:loaigd AND (\r\n" + 
+			"    :cardType='MD' AND (((MA_GD LIKE '01%' OR MA_GD LIKE '12%') AND STATUS_CW=' ' AND REVERSAL_IND<>'R')  \r\n" + 
+			"                    OR ((MA_GD LIKE '01%' OR MA_GD LIKE '12%') AND STATUS_CW<>' '))\r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='VSD' AND ((MA_GD LIKE '07%') OR (MA_GD LIKE '27%' AND STATUS_CW<>' ')) \r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='MC' AND LTTQT='USD' AND MA_GD LIKE '01%' AND REVERSAL_IND='R'\r\n" + 
+			"    OR :cardType='VS' AND LTTQT='USD' AND MA_GD LIKE '27%')\r\n" + 
+			"    \r\n" + 
+			"OR 'GDTTHH'=:loaigd AND (\r\n" + 
+			"    :cardType='MD' AND ((MA_GD LIKE '00%' AND STATUS_CW=' ')  \r\n" + 
+			"    OR (MA_GD LIKE '18%' AND STATUS_CW=' ') OR (MA_GD LIKE '00%' AND REVERSAL_IND='R' AND STATUS_CW<>' ') )\r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='VSD' AND (((MA_GD LIKE '05%' AND STATUS_CW=' ') OR (MA_GD LIKE '25%' AND STATUS_CW<>' ') OR MA_GD LIKE '26%')) \r\n" + 
+			"                    AND STGD_CHENH_LECH_DO_TY_GIA<0 AND STGD_NGUYEN_TE_CHENH_LECH<0\r\n" + 
+			"    OR :cardType='MC' AND LTTQT='USD' AND (MA_GD LIKE '20%' OR (MA_GD LIKE '00%' AND REVERSAL_IND='R'))\r\n" + 
+			"    OR :cardType='VS' AND LTTQT='USD' AND (MA_GD LIKE '25%' OR (MA_GD LIKE '06%' AND MERCHANT_CITY NOT LIKE '%Visa Direct%'))\r\n" + 
+			"))\r\n" + 
+			"AND NGAY_HOAN_TRA IS NOT NULL", nativeQuery = true)
+	List<DoiSoatData> findGDDaXuLyLechTuNgayDenNgayAndLttqtAndLoaiGd(@Param("tungay") String tungay,@Param("denngay") String denngay,@Param("lttqt") String lttqt,@Param("loaigd") String loaigd,@Param("cardType") String cardType);
 	
 	@Modifying
 	@Query(value = "  UPDATE DSQT_DATA\r\n" + 
@@ -193,12 +281,34 @@ public interface DoiSoatDataRepo extends JpaRepository<DoiSoatData, String> {
 			"  WHERE SO_THE=:soThe AND MA_CAP_PHEP=:maCapPhep AND NGAY_GD=:ngayGd AND TRACE=:trace", nativeQuery = true)
 	void updateNgayHoanTra(@Param(value = "ngayHoanTra") String ngayHoanTra,@Param(value = "soThe") String soThe,@Param(value = "maCapPhep") String maCapPhep,@Param(value = "ngayGd") String ngayGd,@Param(value = "trace") String trace);
 	
+	@Modifying
+	@Query(value = "  UPDATE DSQT_DATA\r\n" + 
+			"  SET NGAY_HOAN_TRA=:ngayHoanTra\r\n" + 
+			"  WHERE ID=:id", nativeQuery = true)
+	void updateNgayHoanTraById(@Param(value = "ngayHoanTra") String ngayHoanTra,@Param(value = "id") String id);
+	
 	
 	@Query(value = "SELECT DISTINCT FILE_NAME " + 
 			"FROM CCPS.INCOMING_MASTER " + 
 			"WHERE REPLACE(SUBSTR(FILE_NAME, INSTR(FILE_NAME, 'TT112T0.')+8,10),'-','') BETWEEN :fromIncomingDate AND :toIncomingDate " + 
 			"ORDER BY REPLACE(SUBSTR(FILE_NAME, INSTR(FILE_NAME, 'TT112T0.')+8,10),'-','') ASC", nativeQuery = true)
 	List<String> findMCIncomingFileNameByDate(@Param("fromIncomingDate") String fromIncomingDate,@Param("toIncomingDate") String toIncomingDate);
+	
+	@Query(value = "SELECT DISTINCT PST_DT\r\n" + 
+			"FROM CCPS.INCOMING_VISA_VIEW  \r\n" + 
+			"WHERE PST_DT BETWEEN :fromIncomingDate AND :toIncomingDate \r\n" + 
+			"ORDER BY PST_DT ASC", nativeQuery = true)
+	List<String> findVSIncomingFileNameByDate(@Param("fromIncomingDate") String fromIncomingDate,@Param("toIncomingDate") String toIncomingDate);
+	
+	@Query(value = "SELECT LISTAGG(F9_IR121_PRFX, '|')\r\n" + 
+			"         WITHIN GROUP (ORDER BY F9_IR121_PRFX) \"BIN_LIST\"\r\n" + 
+			"FROM (SELECT DISTINCT F9_IR121_PRFX FROM IR121@IM\r\n" + 
+			"    WHERE FX_IR121_CRD_BRN=:crdBrn\r\n" + 
+			"    AND F9_IR121_ACCT_PRV=:acctPrv)", nativeQuery = true)
+	String findBinByCardtype(@Param("crdBrn") String crdBrn, @Param("acctPrv") int acctPrv);
+	
+	@Query(value = "SELECT TRIM(AC_DESC) FROM FCUSR01.STTM_CUST_ACCOUNT@EXADATA WHERE CUST_AC_NO=:casa", nativeQuery = true)
+	String findAccountDescription(@Param("casa") String casa);
 	
 	//1.1. GIAO DỊCH THẺ <MC/VS> DEBIT SCB THANH TOÁN HÀNG HÓA - GD được thanh quyết toán
 	@Query(value = "SELECT * FROM DSQT_DATA " + 

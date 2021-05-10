@@ -23,10 +23,10 @@ public interface PhiInterchangeService {
 	 * @return Page
 	 */
 	
-	public List<PhiInterchange> phiInterchangeGDRTMDuocTQT(String curr, String ngayAdv) throws SQLException;
+	public List<PhiInterchange> phiInterchangeGDRTMDuocTQT(String curr, String ngayAdv, String cardtype) throws SQLException;
 	
-	public List<PhiInterchange> phiInterchangeGDMoneySendFF(String curr, String ngayAdv) throws SQLException;
+	public List<PhiInterchange> phiInterchangeGDMoneySendFF(String curr, String ngayAdv, String cardtype) throws SQLException;
 	
-	public List<PhiInterchange> phiInterchangeHoanTraGDRTM(String curr, String ngayAdv) throws SQLException;
+	public List<PhiInterchange> phiInterchangeHoanTraGDRTM(String curr, String ngayAdv, String cardtype) throws SQLException;
 	
 }

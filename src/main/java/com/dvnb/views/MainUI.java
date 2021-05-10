@@ -1,6 +1,8 @@
 package com.dvnb.views;
 
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.server.WebBrowser;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
@@ -43,21 +46,23 @@ public class MainUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
+//		VaadinSession.getCurrent().getSession().setMaxInactiveInterval( ( int ) TimeUnit.MINUTES.toSeconds( 1 ) );  // Setting timeout of 1000.000 minutes = ( 1.000.000 * 60 ) seconds.
+
 		if (!SecurityUtils.isLoggedIn()) {
 			showLogin();
 		} else {
 			showMainForm();
 		}
 
-		addDetachListener(new DetachListener() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void detach(DetachEvent event) {
-				// Xoa tat ca cac case dang xu da duoc dang ky
-				getSession().close();
-			}
-		});
+//		addDetachListener(new DetachListener() {
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public void detach(DetachEvent event) {
+//				// Xoa tat ca cac case dang xu da duoc dang ky
+//				getSession().close();
+//			}
+//		});
 	}
 
 	private void showLogin() {

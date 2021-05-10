@@ -23,6 +23,12 @@ public class DescriptionServiceImpl implements DescriptionService {
 	}
 	
 	@Override
+	public Iterable<DvnbDescription> findAllByTypeByOrderBySequencenoDesc(String type) {
+		// TODO Auto-generated method stub
+		return descriptionRepo.findAllByTypeByOrderBySequencenoDesc(type);
+	}
+	
+	@Override
 	public void save(String id, String desc, String type) {
 
 		DvnbDescription fdsDescription = new DvnbDescription();
@@ -43,5 +49,7 @@ public class DescriptionServiceImpl implements DescriptionService {
 		fdsDescription.setId(id);
 		descriptionRepo.delete(fdsDescription);
 	}
+
+	
 
 }

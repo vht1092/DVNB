@@ -47,6 +47,19 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-legacy</artifactId>
+            <version>1.0.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
 		<!-- End -->
 		<!-- Log4j -->
 		<dependency>
@@ -201,6 +214,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<!-- 			<plugin> -->
+<!-- 			  <artifactId>maven-war-plugin</artifactId> -->
+<!-- 			  <version>2.6</version> -->
+<!-- 			  <configuration> -->
+<!-- 			    <failOnMissingWebXml>false</failOnMissingWebXml> -->
+<!-- 			  </configuration> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>

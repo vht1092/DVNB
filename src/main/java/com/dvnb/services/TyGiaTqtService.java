@@ -9,4 +9,6 @@ public interface TyGiaTqtService {
 	public TyGiaTqt findTyGiaTqtByNgayAdv(String ngayAdv);
 	
 	public TyGiaTqt findTyGiaTqtByNgayAdvAndCardType(String ngayAdv,String cardType);
+	
+	public TyGiaTqt calcTyGiaMastercardByNgayAdvAndCardType(String ngayAdv,String cardType);
 }

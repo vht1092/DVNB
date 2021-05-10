@@ -1,6 +1,19 @@
 package com.dvnb;
 
 import com.dvnb.components.*;
+import com.dvnb.components.dstqt.CapNhatPhiInterchange;
+import com.dvnb.components.dstqt.DoiSoatThanhQuyetToan;
+import com.dvnb.components.dstqt.GiaoDichChuaDuocTQT;
+import com.dvnb.components.dstqt.GiaoDichDaXuLyLech;
+import com.dvnb.components.dstqt.GiaoDichPhatSinhHoanTraLech;
+import com.dvnb.components.dstqt.HachToanThanhQuyetToan;
+import com.dvnb.components.dstqt.InterchangeTrongThang;
+import com.dvnb.components.dstqt.PhanBoInterchangeVeDonVi;
+import com.dvnb.components.dstqt.TinhTyGiaTQT;
+import com.dvnb.components.dstqt.TruyVanGDDaTQT;
+import com.dvnb.components.dvnb.BaoCaoDVNB;
+import com.dvnb.components.dvnb.ImportDVNB;
+import com.dvnb.components.pbcp.*;
 import com.vaadin.ui.Component;
 
 /**
@@ -19,12 +32,16 @@ public enum DvnbTabType {
 	DOISOATTQT(DoiSoatThanhQuyetToan.class,DoiSoatThanhQuyetToan.CAPTION),
 	TINHTYGIATQT(TinhTyGiaTQT.class,TinhTyGiaTQT.CAPTION),
 	TRUYVANGDDATQT(TruyVanGDDaTQT.class,TruyVanGDDaTQT.CAPTION),
+	HACHTOANTQT(HachToanThanhQuyetToan.class,HachToanThanhQuyetToan.CAPTION),
 	CAPNHATPHIINTERCHANGEHANGNGAY(CapNhatPhiInterchange.class,CapNhatPhiInterchange.CAPTION),
 	INTERCHANGETRONGTHANG(InterchangeTrongThang.class,InterchangeTrongThang.CAPTION),
 	PHANBOINTERCHANGEVEDONVI(PhanBoInterchangeVeDonVi.class,PhanBoInterchangeVeDonVi.CAPTION),
 	GDPHATSINHHOANTRALECH(GiaoDichPhatSinhHoanTraLech.class,GiaoDichPhatSinhHoanTraLech.CAPTION),
 	GDDAXULYLECH(GiaoDichDaXuLyLech.class,GiaoDichDaXuLyLech.CAPTION),
-	GDCHUADUOCTQT(GiaoDichChuaDuocTQT.class,GiaoDichChuaDuocTQT.CAPTION);
+	GDCHUADUOCTQT(GiaoDichChuaDuocTQT.class,GiaoDichChuaDuocTQT.CAPTION),
+	BATCHTARGOP(IppBatch.class,IppBatch.CAPTION),
+	DATAPBCPBYDRIVER(SummaryByDriver.class,SummaryByDriver.CAPTION),
+	UPDATEBILLINGGRP(UpdateCodeFee.class,UpdateCodeFee.CAPTION);
 	
 	private final String caption;
 	private final Class<? extends Component> classComponent;

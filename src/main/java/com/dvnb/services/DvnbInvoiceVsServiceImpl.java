@@ -1,5 +1,7 @@
 package com.dvnb.services;
 
+import java.math.BigDecimal;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +52,49 @@ public class DvnbInvoiceVsServiceImpl implements DvnbInvoiceVsService {
 	public void updateDeviationById(String deviation, String id) {
 		dvnbInvoiceVsRepo.updateDeviation(deviation, id);
 	}
+	
+	@Override
+	public void updateKhongphanboByBillingLineAndInvoiceId(String ky, String billingLine, String invoiceId) {
+		// TODO Auto-generated method stub
+		dvnbInvoiceVsRepo.updateKhongphanboByBillingLineAndInvoiceId(ky, billingLine, invoiceId);
+	}
+	
+	@Override
+	public int countInvoiceByKyAndKetChuyenStatus(String ky, String ketchuyenStatus) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceVsRepo.countInvoiceByKyAndKetChuyenStatus(ky, ketchuyenStatus);
+	}
+	
+	@Override
+	public void deleteByKyHoaDon(String ky) {
+		dvnbInvoiceVsRepo.deleteByKy(ky);
+	}
+
+	@Override
+	public int updateKyMoiByIdAndKyMoiIsNotNull(String ky, String id) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceVsRepo.updateKyMoiByIdAndKyMoiIsNotNull(ky, id);
+	}
+
+	@Override
+	public int insertKhongKetChuyenIntoKyMoiById(String id, String newId, BigDecimal creTms, String userId, String kyMoi, String ngaythuchien,String ketchuyenStatus) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceVsRepo.insertKhongKetChuyenIntoKyMoiById(id, newId, creTms, userId, kyMoi, ngaythuchien,ketchuyenStatus);
+	}
+
+	@Override
+	public void deleteByOldId(String oldId) {
+		// TODO Auto-generated method stub
+		dvnbInvoiceVsRepo.deleteByOldId(oldId);
+	}
+
+	@Override
+	public int updateKyMoiByIdAndKyMoiIsNull(String ky, String id) {
+		// TODO Auto-generated method stub
+		return dvnbInvoiceVsRepo.updateKyMoiByIdAndKyMoiIsNull(ky, id);
+	}
+
+
+
+	
 }

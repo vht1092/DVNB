@@ -119,6 +119,12 @@ public class DvnbInvoiceMc implements Serializable {
 	
 	@Column(name = "NGAY_THUC_HIEN", nullable = false, precision = 8)
 	private BigDecimal ngayThucHien;
+	
+	@Column(name = "KY_MOI", nullable = false, length = 6) 	
+	private String kyMoi;
+	
+	@Column(name = "OLD_ID", nullable = false, length = 24)
+	private String oldId;
 
 	public BigDecimal getCreTms() {
 		return creTms;
@@ -407,6 +413,22 @@ public class DvnbInvoiceMc implements Serializable {
 
 	public void setDeviation(String deviation) {
 		this.deviation = deviation;
+	}
+
+	public String getKyMoi() {
+		return kyMoi;
+	}
+
+	public void setKyMoi(String kyMoi) {
+		this.kyMoi = kyMoi;
+	}
+
+	public String getOldId() {
+		return oldId;
+	}
+
+	public void setOldId(String oldId) {
+		this.oldId = oldId;
 	}
 
 	

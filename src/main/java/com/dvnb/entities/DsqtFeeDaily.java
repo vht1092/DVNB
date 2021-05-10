@@ -57,6 +57,9 @@ public class DsqtFeeDaily implements Serializable {
 	@Column(name = "PHI_XU_LY_GD", nullable = false, precision = 20,scale = 5)
 	private BigDecimal phiXuLyGd;
 	
+	@Column(name = "PHI_XU_LY_GD_DUOC_HOAN_TRA", nullable = false, precision = 20,scale = 5)
+	private BigDecimal phiXuLyGdDuocHoanTra;
+	
 	@Column(name = "TONG_INTERCHANGE", nullable = false, precision = 20,scale = 5)
 	private BigDecimal tongInterchange;
 	
@@ -198,6 +201,14 @@ public class DsqtFeeDaily implements Serializable {
 
 	public void setTongPhiGd(BigDecimal tongPhiGd) {
 		this.tongPhiGd = tongPhiGd;
+	}
+
+	public BigDecimal getPhiXuLyGdDuocHoanTra() {
+		return phiXuLyGdDuocHoanTra;
+	}
+
+	public void setPhiXuLyGdDuocHoanTra(BigDecimal phiXuLyGdDuocHoanTra) {
+		this.phiXuLyGdDuocHoanTra = phiXuLyGdDuocHoanTra;
 	}
 
 	

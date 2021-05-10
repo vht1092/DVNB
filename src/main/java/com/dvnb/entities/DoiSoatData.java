@@ -55,13 +55,13 @@ public class DoiSoatData implements Serializable {
 	private String ngayFileIncoming;
 	
 	@Column(name = "ST_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stGd;
+	private BigDecimal stGd = BigDecimal.ZERO;
 	
 	@Column(name = "ST_TQT", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stTqt;
+	private BigDecimal stTqt = BigDecimal.ZERO;
 	
 	@Column(name = "ST_QD_VND", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stQdVnd;
+	private BigDecimal stQdVnd = BigDecimal.ZERO;
 	
 	@Column(name = "LTGD", nullable = false, length = 10)
 	private String ltgd;
@@ -70,7 +70,7 @@ public class DoiSoatData implements Serializable {
 	private String lttqt;
 	
 	@Column(name = "INTERCHANGE", nullable = false, precision = 20,scale = 5)
-	private BigDecimal interchange;
+	private BigDecimal interchange = BigDecimal.ZERO;
 	
 	@Column(name = "MA_CAP_PHEP", nullable = false, length = 10)
 	private String maCapPhep;
@@ -82,67 +82,73 @@ public class DoiSoatData implements Serializable {
 	private String reversalInd;
 	
 	@Column(name = "ISSUER_CHARGE", nullable = false, length = 10)
-	private String issuerCharge;
+	private String issuerCharge = " ";
 	
 	@Column(name = "MERCHANT_CITY", nullable = false, length = 200)
-	private String merchantCity;
+	private String merchantCity = " ";
 	
 	@Column(name = "ST_TRICH_NO_KH_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stTrichNoKhGd;
+	private BigDecimal stTrichNoKhGd = BigDecimal.ZERO;
 	
 	@Column(name = "STGD_NGUYEN_TE_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stgdNguyenTeGd;
+	private BigDecimal stgdNguyenTeGd = BigDecimal.ZERO;
 	
 	@Column(name = "LOAI_TIEN_NGUYEN_TE_GD", nullable = false, length = 10)
-	private String loaiTienNguyenTeGd;
+	private String loaiTienNguyenTeGd = " ";
 	
 	@Column(name = "PHI_ISA_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiIsaGd;
+	private BigDecimal phiIsaGd = BigDecimal.ZERO;
+	
+	@Column(name = "VAT_PHI_ISA_GD", nullable = false, precision = 20,scale = 5)
+	private BigDecimal vatPhiIsaGd = BigDecimal.ZERO;
 	
 	@Column(name = "PHI_RTM_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiRtmGd;
+	private BigDecimal phiRtmGd = BigDecimal.ZERO;
+	
+	@Column(name = "VAT_PHI_RTM_GD", nullable = false, precision = 20,scale = 5)
+	private BigDecimal vatPhiRtmGd = BigDecimal.ZERO;
 	
 	@Column(name = "STGD_NGUYEN_TE_CHENH_LECH", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stgdNguyenTeChenhLech;
+	private BigDecimal stgdNguyenTeChenhLech = BigDecimal.ZERO;
 	
 	@Column(name = "STGD_CHENH_LECH_DO_TY_GIA", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stgdChenhLechDoTyGia;
+	private BigDecimal stgdChenhLechDoTyGia = BigDecimal.ZERO;
 	
 	@Column(name = "TY_GIA_TRICH_NO", nullable = false, precision = 20,scale = 5)
-	private BigDecimal tyGiaTrichNo;
+	private BigDecimal tyGiaTrichNo = BigDecimal.ZERO;
 	
 	@Column(name = "SO_TIEN_GD_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal soTienGdHoanTraTruyThu;
+	private BigDecimal soTienGdHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "PHI_ISA_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiIsaHoanTraTruyThu;
+	private BigDecimal phiIsaHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "VAT_PHI_ISA_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal vatPhiIsaHoanTraTruyThu;
+	private BigDecimal vatPhiIsaHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "PHI_RTM_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiRtmHoanTraTruyThu;
+	private BigDecimal phiRtmHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "VAT_PHI_RTM_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal vatPhiRtmHoanTraTruyThu;
+	private BigDecimal vatPhiRtmHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "TONG_PHI_VAT_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal tongPhiVatHoanTraTruyThu;
+	private BigDecimal tongPhiVatHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "TONG_HOAN_TRA_TRUY_THU", nullable = false, precision = 20,scale = 5)
-	private BigDecimal tongHoanTraTruyThu;
+	private BigDecimal tongHoanTraTruyThu = BigDecimal.ZERO;
 	
 	@Column(name = "PHI_XU_LY_GD", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiXuLyGd;
+	private BigDecimal phiXuLyGd = BigDecimal.ZERO;
 	
-	@Column(name = "DVPHT", nullable = false, length = 10)
+	@Column(name = "DVPHT", nullable = false, length = 50)
 	private String dvpht;
 	
 	@Column(name = "TRACE", nullable = false, length = 10)
 	private String trace;
 	
 	@Column(name = "STATUS_CW", nullable = false, length = 10)
-	private String statusCw;
+	private String statusCw = "NA";
 	
 	@Column(name = "MCC", nullable = false, length = 20)
 	private String mcc;
@@ -153,26 +159,14 @@ public class DoiSoatData implements Serializable {
 	@Column(name = "CRD_PGM", nullable = false, length = 10)
 	private String crdpgm;
 	
-	@Column(name = "GHI_CHU", nullable = false, length = 200)
-	private String ghiChu;
-	
-	@Column(name = "ST_GD_HOAN_TRA", nullable = false, precision = 20,scale = 5)
-	private BigDecimal stGdHoanTra;
-	
-	@Column(name = "PHI_HOAN_TRA_KH", nullable = false, precision = 20,scale = 5)
-	private BigDecimal phiHoanTraKh;
-	
-	@Column(name = "THUE_HOAN_TRA_KH", nullable = false, precision = 20,scale = 5)
-	private BigDecimal thueHoanTraKh;
-	
-	@Column(name = "TONG_PHI_THUE_HOAN_TRA_KH", nullable = false, precision = 20,scale = 5)
-	private BigDecimal tongPhiThueHoanTraKh;
-	
-	@Column(name = "TONG_HOAN_TRA_KH", nullable = false, precision = 20,scale = 5)
-	private BigDecimal tongHoanTraKh;
-
 	@Column(name = "NGAY_HOAN_TRA", nullable = false, length = 8)
 	private String ngayHoanTra;
+	
+	@Column(name = "LOC", nullable = false, length = 12)
+	private String loc = " ";
+	
+	@Column(name = "CARD_BRN", nullable = false, length = 3)
+	private String cardBrn;
 	
 	public BigDecimal getCreTms() {
 		return creTms;
@@ -529,54 +523,6 @@ public class DoiSoatData implements Serializable {
 		this.issuerCharge = issuerCharge;
 	}
 
-	public String getGhiChu() {
-		return ghiChu;
-	}
-
-	public void setGhiChu(String ghiChu) {
-		this.ghiChu = ghiChu;
-	}
-
-	public BigDecimal getStGdHoanTra() {
-		return stGdHoanTra;
-	}
-
-	public void setStGdHoanTra(BigDecimal stGdHoanTra) {
-		this.stGdHoanTra = stGdHoanTra;
-	}
-
-	public BigDecimal getPhiHoanTraKh() {
-		return phiHoanTraKh;
-	}
-
-	public void setPhiHoanTraKh(BigDecimal phiHoanTraKh) {
-		this.phiHoanTraKh = phiHoanTraKh;
-	}
-
-	public BigDecimal getThueHoanTraKh() {
-		return thueHoanTraKh;
-	}
-
-	public void setThueHoanTraKh(BigDecimal thueHoanTraKh) {
-		this.thueHoanTraKh = thueHoanTraKh;
-	}
-
-	public BigDecimal getTongPhiThueHoanTraKh() {
-		return tongPhiThueHoanTraKh;
-	}
-
-	public void setTongPhiThueHoanTraKh(BigDecimal tongPhiThueHoanTraKh) {
-		this.tongPhiThueHoanTraKh = tongPhiThueHoanTraKh;
-	}
-
-	public BigDecimal getTongHoanTraKh() {
-		return tongHoanTraKh;
-	}
-
-	public void setTongHoanTraKh(BigDecimal tongHoanTraKh) {
-		this.tongHoanTraKh = tongHoanTraKh;
-	}
-
 	public String getCif() {
 		return cif;
 	}
@@ -608,5 +554,39 @@ public class DoiSoatData implements Serializable {
 	public void setTenChuTk(String tenChuTk) {
 		this.tenChuTk = tenChuTk;
 	}
+
+	public BigDecimal getVatPhiIsaGd() {
+		return vatPhiIsaGd;
+	}
+
+	public void setVatPhiIsaGd(BigDecimal vatPhiIsaGd) {
+		this.vatPhiIsaGd = vatPhiIsaGd;
+	}
+
+	public BigDecimal getVatPhiRtmGd() {
+		return vatPhiRtmGd;
+	}
+
+	public void setVatPhiRtmGd(BigDecimal vatPhiRtmGd) {
+		this.vatPhiRtmGd = vatPhiRtmGd;
+	}
+
+	public String getLoc() {
+		return loc;
+	}
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
+	public String getCardBrn() {
+		return cardBrn;
+	}
+
+	public void setCardBrn(String cardBrn) {
+		this.cardBrn = cardBrn;
+	}
+	
+	
 
 }

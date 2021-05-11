@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptHoanTraPhi" pageWidth="1684" pageHeight="1191" orientation="Landscape" columnWidth="1644" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ee42a2fd-022c-435c-a102-6800ec011f0c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DW_LIVE"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="74fae35a-23f5-4777-9272-aaccbe069986">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DW_LIVE"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="s_ngayadv" class="java.lang.String"/>
+		<parameter name="s_loaigd" class="java.lang.String"/>
+		<parameter name="s_cardbrn" class="java.lang.String"/>
+		<queryString language="plsql">
+			<![CDATA[SELECT ROWNUM STT, A.*
+FROM DSQT_DATA A
+WHERE LTTQT='USD' AND NGAY_ADV=$P{s_ngayadv}
+AND ('All'=$P{s_loaigd} AND (MA_GD LIKE '25%' OR (MA_GD LIKE '06%' AND MERCHANT_CITY NOT LIKE '%Visa Direct%') OR MA_GD LIKE '20%' OR (MA_GD LIKE '00%' AND REVERSAL_IND='R') OR MA_GD LIKE '27%' OR (MA_GD LIKE '01%' AND REVERSAL_IND='R'))  
+    OR 'GDHTRTM'=$P{s_loaigd} AND (MA_GD LIKE '27%' OR (MA_GD LIKE '01%' AND REVERSAL_IND='R'))
+    OR 'GDHTTTHH'=$P{s_loaigd} AND (MA_GD LIKE '25%' OR (MA_GD LIKE '06%' AND MERCHANT_CITY NOT LIKE '%Visa Direct%') OR MA_GD LIKE '20%' OR (MA_GD LIKE '00%' AND REVERSAL_IND='R')))  
+AND ('All'= $P{s_cardbrn} OR CARD_BRN=$P{s_cardbrn})]]>
+		</queryString>
+		<field name="STT" class="java.lang.String"/>
+		<field name="SO_THE" class="java.lang.String"/>
+		<field name="MA_GD" class="java.lang.String"/>
+		<field name="NGAY_GD" class="java.lang.String"/>
+		<field name="NGAY_FILE_INCOMING" class="java.lang.String"/>
+		<field name="ST_GD" class="java.math.BigDecimal"/>
+		<field name="ST_TQT" class="java.math.BigDecimal"/>
+		<field name="ST_QD_VND" class="java.math.BigDecimal"/>
+		<field name="LTGD" class="java.lang.String"/>
+		<field name="LTTQT" class="java.lang.String"/>
+		<field name="MA_CAP_PHEP" class="java.lang.String"/>
+		<field name="DVCNT" class="java.lang.String"/>
+		<field name="STGD_NGUYEN_TE_GD" class="java.math.BigDecimal"/>
+		<field name="LOAI_TIEN_NGUYEN_TE_GD" class="java.lang.String"/>
+		<field name="ST_TRICH_NO_KH_GD" class="java.math.BigDecimal"/>
+		<field name="STGD_NGUYEN_TE_CHENH_LECH" class="java.math.BigDecimal"/>
+		<field name="PHI_ISA_GD" class="java.math.BigDecimal"/>
+		<field name="VAT_PHI_ISA_GD" class="java.math.BigDecimal"/>
+		<field name="PHI_RTM_GD" class="java.math.BigDecimal"/>
+		<field name="VAT_PHI_RTM_GD" class="java.math.BigDecimal"/>
+		<field name="TEN_CHU_THE" class="java.lang.String"/>
+		<field name="DVPHT" class="java.lang.String"/>
+		<field name="LOC" class="java.lang.String"/>
+		<field name="STGD_CHENH_LECH_DO_TY_GIA" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="p_ngayadv" class="java.lang.String"/>
+	<parameter name="p_loaigd" class="java.lang.String"/>
+	<parameter name="p_cardbrn" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM DUAL]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<textField>
+				<reportElement x="-3" y="30" width="1643" height="50" uuid="e2fd37c7-5c37-46d8-bcb1-58b32d7e312a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DANH SÁCH HOÀN TRẢ PHÍ VÀ VAT CÁC GIAO DỊCH ĐƯỢC " +  (new Boolean($P{p_cardbrn}.equals("VSD")) ? "VS" :
+(new Boolean($P{p_cardbrn}.equals("VS")) ? "VS" : (new Boolean($P{p_cardbrn}.equals("MD")) ? "MC" :
+(new Boolean($P{p_cardbrn}.equals("MC")) ? "MC" : "" )))) +" HOÀN TRẢ\nTHEO ADV NGÀY " + $P{p_ngayadv}.substring(6,8)+"/"+$P{p_ngayadv}.substring(4,6)+"/"+$P{p_ngayadv}.substring(0,4)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-3" y="0" width="1643" height="30" uuid="da406a69-eac8-4714-a573-5f4f7d781de5"/>
+				<text><![CDATA[NGÂN HÀNG TMCP SÀI GÒN
+PHÒNG GIÁM SÁT VÀ TRA SOÁT T&NHS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="114">
+			<componentElement>
+				<reportElement x="0" y="6" width="1640" height="100" uuid="501e797c-f505-4d66-b4de-dff418e8baba">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="269a38ae-82f0-4182-b135-9ee6247175b1">
+						<datasetParameter name="s_ngayadv">
+							<datasetParameterExpression><![CDATA[$P{p_ngayadv}.substring(0,8)]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="s_loaigd">
+							<datasetParameterExpression><![CDATA[$P{p_loaigd}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="s_cardbrn">
+							<datasetParameterExpression><![CDATA[$P{p_cardbrn}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="775" uuid="fffb855f-6fa3-4b3c-bcc2-606a24c3b258">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [12]"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="775" height="30" uuid="161bcddc-5fd5-416a-b927-f060cce17b54"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[THÔNG TIN GIAO DỊCH ĐƯỢC HOÀN TRẢ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="30" uuid="7faa798d-2a6f-498e-a4af-701a76631c73">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="30" height="40" uuid="3f37b9ac-1790-429f-a47a-82afd7d7f27d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Arial" isBold="true"/>
+									</textElement>
+									<text><![CDATA[STT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="30" height="30" uuid="b22ea02f-9ed7-44c2-8d65-b6b9f00a94d9"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{STT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="120" uuid="34defcb8-b29d-4074-8f01-10c313506527">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<staticText>
+									<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="120" height="40" uuid="37a42b60-b3e7-4a39-abc2-2743f02bf82a"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Arial" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Số thẻ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="120" height="30" uuid="232d91d9-8796-4828-ab56-a03240775edd"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{SO_THE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="40" uuid="d8a9ace6-2d1c-4998-83ba-d4c25625fb42">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="40" height="40" uuid="5a28ece3-e47f-4c80-b292-af13675a08a1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Arial" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Mã GD]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="40" height="30" uuid="21f43dda-fae6-4fd4-944e-838293ecc0d0"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{MA_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="a65ac734-7b2c-4165-9c27-5efda4a3439d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="40" uuid="b1e7ef5a-200a-4226-a0b7-7b62c41116d1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Arial" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Ngày GD]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="60" height="30" uuid="7b15ebad-62e2-47c0-b1a8-026bba6ed18e"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{NGAY_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="110" uuid="82b8e453-b579-45d5-ac15-21faf0256c01">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="110" height="40" uuid="9b741e3f-1db5-405d-adfb-2281e7fe3909"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Ngày file Incoming]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="110" height="30" uuid="57f2735e-e9cf-4b31-bb8c-cab31f247393"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{NGAY_FILE_INCOMING}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="c7b0214c-9d20-417f-9dbc-d6464f955d60">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<staticText>
+									<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="60" height="40" uuid="4521ce51-d5cc-4bf6-877f-848c6401df96"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Arial" isBold="true"/>
+									</textElement>
+									<text><![CDATA[ST GD]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="60" height="30" uuid="f9e440b8-2ce4-414c-8285-8ec2ceb8822e"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ST_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="4fddda75-360d-4e59-9361-31bbc16a25f9">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="60" height="40" uuid="296e2acd-cd14-4d36-8aab-8216d20c2d9d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ST TQT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="60" height="30" uuid="7ef4f003-7ca0-4fd1-a22d-36928e75dec1"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ST_TQT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="5e86fc62-7876-417a-ad74-08e9fc1867b1">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="60" height="40" uuid="9b75264d-a563-4665-b391-fd34fef0c708"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ST QĐ VNĐ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="60" height="30" uuid="9073af9e-b419-405a-ab51-e9abcdf7bd9d"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ST_QD_VND}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="45" uuid="cb5a5166-2882-4c49-b190-2d53d24bd940">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="45" height="40" uuid="8f278073-8229-4acb-9fe7-d83e6fea5a19"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[LTGD]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="45" height="30" uuid="0d3fd63a-42a4-4f2d-941a-3e2af22a2cc1"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{LTGD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="5c93ef69-522d-43b6-914a-18b03c6caeda">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="40" uuid="cb4bec03-0d58-4b1f-9866-fa33c9537a28"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[LTTQT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="50" height="30" uuid="486aecf1-b4fb-49de-b6ee-cc9f226a856a"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{LTTQT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="3f1db672-0134-4f83-a800-9e8a26dd0d75">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="60" height="40" uuid="08673b45-8f3b-4836-b37e-0eb8231698f5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Mã cấp phép]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="60" height="30" uuid="596e086d-26d6-4b3a-a086-ad79e36055b6"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{MA_CAP_PHEP}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="d12d3c75-f740-4c28-9e52-7ecb46eeac6d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="80" height="40" uuid="8147f41b-cb8f-4e00-8bdd-b96e920e03e4"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ĐVCNT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="80" height="30" uuid="e173074e-bc87-4fb1-a324-c89ab165418e"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{DVCNT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="865" uuid="599763ba-c31e-42e2-a179-f0957ae2b5ee">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [12]"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="865" height="30" uuid="2543f083-ddb7-49c9-ba34-fbcbf8f554a8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[THÔNG TIN HOÀN TRẢ KH]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:column width="61" uuid="bac900c3-3329-4232-8fdf-5fbf3b1b3857">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="babcb7ca-2c49-45f3-90b3-940670b91c31"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[STGD nguyên tệ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="65805cb9-01c7-45e0-8547-0c6721a7da60"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{STGD_NGUYEN_TE_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="3f66dc92-7867-4bb8-ba12-c123bf437a63">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="40" uuid="5e03d15b-0d36-476c-8399-06dafdef1186"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Loại tiền nguyên tệ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="50" height="30" uuid="6f8dce52-3413-4780-bccb-7143ed9df085"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{LOAI_TIEN_NGUYEN_TE_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="59" uuid="28833520-b27e-4b3f-9eca-98309c0980b3">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
+							<jr:columnHeader style="Table_CH" height="40">
+								<staticText>
+									<reportElement x="0" y="0" width="59" height="40" uuid="0b8d948b-6713-4ccd-b3f3-66daaf6c8d09"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[STGD nguyên tệ chênh lệch]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="59" height="30" uuid="6d5265bd-2891-4765-8840-3b930db280a7"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{STGD_NGUYEN_TE_CHENH_LECH}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="c78141cc-3e98-4c72-bfd3-1a1318fe4cd9">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column16"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="aa32385c-cb7d-48dc-bfc4-b5e63f3ad376"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[STGD ghi nợ KH (VND)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="ed0570c4-01c1-4235-99d3-0a30292b36e4"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{ST_TRICH_NO_KH_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="7f6cae4a-59ed-4fc3-994c-c5149abe7e63">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column17"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="96181aef-b063-4045-99a9-6ec0884148ca"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Chênh lệch quy đổi VND]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="61" height="30" uuid="5b5e70bc-f01a-4e28-9e0a-548c5e77fc6d"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{STGD_CHENH_LECH_DO_TY_GIA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="78a9831d-7781-4b49-be22-4ed36584ea0a">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column18"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="d950b971-dbe0-4729-b275-6cfa8b084143"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Phí ISA]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="430423f1-be43-459a-81d3-be4dc2dfcfff"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{PHI_ISA_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="7c58bfbe-9c75-4546-a1dc-d32490157a4d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column19"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="cfc163f6-7150-4542-b9cf-15c4c330b8f1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[VAT Phí ISA]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="9f17af3e-6b4e-4785-ad20-df7647c83891"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{VAT_PHI_ISA_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="44641d7c-7e4b-472c-803f-c272ccbce13e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column20"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="8c602ede-37cc-4f19-a576-92fc552f21b9"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Phí RTM]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="b1232e41-f00b-4aad-9779-27c9720e4c97"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{PHI_RTM_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="61" uuid="b2cf5746-8912-4310-9887-59d34f6ccc20">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column21"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="61" height="40" uuid="5a4e530f-8053-47a9-8071-eac67befcb77"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[VAT Phí RTM]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="61" height="30" uuid="8c02357a-3f86-4cc5-8635-bb8a05f48f33"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{VAT_PHI_RTM_GD}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="121" uuid="769227df-a2a1-4f5a-a2b8-5389993c9c3b">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column22"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="121" height="40" uuid="d58d8e26-6d97-4687-9e80-179274784d95"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Tên chủ thẻ]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="121" height="30" uuid="511c0181-75f7-4859-bda3-421c720ce972"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{TEN_CHU_THE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="121" uuid="2ceeac36-45f6-4b31-baa3-6b69620041ef">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column23"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="121" height="40" uuid="78dbcfbb-4d7d-4cc1-a022-594002888e88"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[ĐVPHT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="121" height="30" uuid="3819e9e4-0052-466a-a573-2ed6389eda79"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{DVPHT}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="87" uuid="bcf718d4-eacf-4a96-9509-9e67c14e5c81">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column24"/>
+							<jr:columnHeader style="Table_CH" height="40" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="87" height="40" uuid="61fba97a-3bba-4090-8158-2b1baf97076c"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[LOC]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement stretchType="ContainerHeight" x="0" y="0" width="87" height="30" uuid="ca6cd2c1-73e9-4661-8589-c6a1ecf87788"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{LOC}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="53">
+			<staticText>
+				<reportElement style="Table_TD" x="0" y="32" width="820" height="21" uuid="9467a604-5588-4e6b-8e12-7c46bacd88a4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Lập bảng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Table_TD" x="820" y="11" width="820" height="21" uuid="62f4e073-7661-4b21-8202-84e2292cbba8"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ngày ... tháng ... năm ...]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Table_TD" x="820" y="32" width="820" height="21" uuid="9010de50-8d09-487a-a251-b7bd98f4647f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Kiểm soát]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
